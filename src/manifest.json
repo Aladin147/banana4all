@@ -1,0 +1,77 @@
+{
+  "manifestVersion": 5,
+  "id": "com.banana4all.plugin",
+  "version": "1.0.0",
+  "name": "Banana4all - AI Image Generator",
+  "description": "Free Photoshop plugin for Google Gemini Flash AI integration",
+  "icons": [
+    {
+      "width": 48,
+      "height": 48,
+      "path": "assets/icon-dark.png",
+      "theme": "dark"
+    },
+    {
+      "width": 48,
+      "height": 48,
+      "path": "assets/icon-light.png",
+      "theme": "light"
+    }
+  ],
+  "entrypoints": [
+    {
+      "type": "panel",
+      "id": "banana4allPanel",
+      "label": {
+        "default": "Banana4all"
+      },
+      "minimumSize": {
+        "width": 400,
+        "height": 600
+      },
+      "maximumSize": {
+        "width": 800,
+        "height": 1200
+      },
+      "preferredSize": {
+        "width": 500,
+        "height": 700
+      },
+      "icons": [
+        {
+          "width": 23,
+          "height": 23,
+          "path": "assets/icon-dark.png",
+          "theme": "dark",
+          "scale": [1, 2]
+        },
+        {
+          "width": 23,
+          "height": 23,
+          "path": "assets/icon-light.png",
+          "theme": "light",
+          "scale": [1, 2]
+        }
+      ]
+    }
+  ],
+  "host": {
+    "app": "PS",
+    "minVersion": "25.0"
+  },
+  "permissions": [
+    "network",
+    "localFileSystem",
+    "clipboard",
+    "activeDocument",
+    "launchProcess"
+  ],
+  "requiredPermissions": [
+    {
+      "type": "LaunchProcess",
+      "processes": [
+        "node"
+      ]
+    }
+  ]
+}
