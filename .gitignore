@@ -60,3 +60,7 @@ yarn.lock
 # Development
 debug/
 logs/
+
+# Claude AI
+.claude/settings.local.json
+.claude/
