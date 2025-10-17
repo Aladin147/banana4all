@@ -1,44 +1,51 @@
-# 🍌 Banana4all - Free Photoshop Plugin for Google Gemini Flash
+# 🍌 Banana4All
 
-![Banana4all Logo](https://img.shields.io/badge/Photoshop-Plugin-yellow?style=for-the-badge&logo=adobephotoshop)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-1.0.0--beta-blue?style=for-the-badge)
+**AI Image Generation for Photoshop** — Powered by Google's Gemini 2.5 Flash Image (Nano Banana)
 
-**A free, open-source Photoshop plugin that brings Google's powerful Gemini Flash Image Preview (Nano Banana) AI image generation and editing capabilities directly to your workflow.**
+Fast, affordable, high-quality image generation directly in Photoshop. Generate new images from text prompts with professional results at ~$0.001 per image.
 
-## 🎯 Mission Statement
+---
 
-Democratize access to cutting-edge AI image generation by providing a free Photoshop plugin that allows users to use their own Google AI API keys, eliminating paywalls and giving creators full control over their AI tools.
+## ✨ Features
 
-## ✨ Key Features
+**Phase 1 (Current - Stable)**
+- ✅ Text-to-image generation
+- ✅ Direct layer creation in Photoshop
+- ✅ Fast generation (~8 seconds)
+- ✅ Ultra-low cost (~$0.001 per image)
+- ✅ Clean, dark-themed UI
+- ✅ API key persistence
 
-- **🎨 Text-to-Image Generation**: Create images from text descriptions using Gemini Flash
-- **🖼️ Image Editing & Enhancement**: Modify existing images with AI-powered tools
-- **🔧 Inpainting & Outpainting**: Extend or modify specific areas of your images
-- **🔐 Your API Keys**: Use your personal Google AI API credentials
-- **🚀 High Performance**: Optimized for speed with Gemini 2.5 Flash
-- **🌐 Cross-Platform**: Works on Windows and macOS
-- **💰 Completely Free**: No subscriptions, no paywalls, no hidden costs
+**Coming Soon**
+- 🔜 Phase 2: Selection-aware inpainting & layer management
+- 🔜 Phase 3: Reference-guided edits & prompt presets
+- 🔜 Phase 4: Multi-backend support & high-res pipeline
+- 🔜 Phase 5: Context fidelity & realism controls
+- 🔜 Phase 6: Live previews & advanced workflows
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-- Adobe Photoshop 2024 or later (with UXP support)
-- Google AI API key (get one at [Google AI Studio](https://ai.google.dev/))
-- Basic knowledge of Photoshop plugins
+- Adobe Photoshop 2023 or later (UXP support required)
+- Node.js 14+ (for proxy server)
+- OpenRouter API key ([get one free](https://openrouter.ai/keys))
 
 ### Installation
 
-1. **Download the latest release**
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/Aladin147/banana4all.git
+   git clone https://github.com/yourusername/banana4all.git
    cd banana4all
    ```
 
 2. **Install dependencies**
    ```bash
    npm install
+   cd proxy-server
+   npm install
+   cd ..
    ```
 
 3. **Build the plugin**
@@ -46,129 +53,212 @@ Democratize access to cutting-edge AI image generation by providing a free Photo
    npm run build
    ```
 
-4. **Install in Photoshop**
+4. **Start the proxy server**
+   ```bash
+   cd proxy-server
+   npm start
+   ```
+   Keep this terminal running.
+
+5. **Load plugin in Photoshop**
    - Open Photoshop
-   - Go to `Plugins > Manage Plugins`
-   - Click "Add Plugin" and select the `dist` folder
-   - Enable the Banana4all plugin
-
-5. **Configure API Key**
-   - Open Banana4all from `Plugins > Banana4all`
-   - Enter your Google AI API key in the settings
-   - Test connection to verify setup
-
-### First Use
-
-1. Create a new document or open an existing image in Photoshop
-2. Launch Banana4all from the Plugins menu
-3. Enter your prompt or select an area to edit
-4. Choose your generation settings
-5. Click "Generate" and watch the magic happen!
-
-## 📖 Documentation
-
-- [📚 User Guide](docs/user-guide.md) - Complete user documentation
-- [🔧 Developer Guide](docs/developer-guide.md) - For contributors and developers
-- [🎯 Product Requirements](docs/PRD.md) - Detailed feature specifications
-- [🛣️ Roadmap](docs/roadmap.md) - Development phases and milestones
-- [🤝 Contributing](CONTRIBUTING.md) - How to contribute to the project
-
-## 🏗️ Architecture
-
-Banana4all is built using Adobe's modern UXP (Unified Extensibility Platform) with the following architecture:
-
-```
-Photoshop UXP Plugin
-├── UI Layer (HTML/CSS)
-├── Business Logic (JavaScript)
-├── API Client (Gemini Integration)
-└── Data Layer (Secure Storage)
-```
-
-### Key Technologies
-
-- **Adobe UXP**: Modern plugin framework for Creative Cloud
-- **Node.js**: Runtime for backend operations
-- **Google Gemini API**: AI image generation and editing
-- **Modern JavaScript**: ES6+ features and modules
-- **Secure Storage**: Encrypted API key management
-
-## 🎨 Usage Examples
-
-### Basic Text-to-Image
-```javascript
-// Example prompt structure
-const prompt = "A photorealistic portrait of a astronaut cat wearing a space helmet, cinematic lighting, 8K detail";
-```
-
-### Image Enhancement
-```javascript
-// Example editing prompt
-const prompt = "Enhance this image with vibrant colors, sharpen details, add cinematic lighting";
-```
-
-### Inpainting
-```javascript
-// Example inpainting prompt
-const prompt = "Replace the selected area with a beautiful mountain landscape";
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-Create a `.env` file for development:
-
-```env
-# Google AI API Configuration
-GOOGLE_AI_API_KEY=your_api_key_here
-GOOGLE_AI_PROJECT_ID=your_project_id
-
-# Development Settings
-NODE_ENV=development
-PORT=3000
-```
-
-### Plugin Settings
-- **API Key**: Your Google AI API key
-- **Model Selection**: Choose between Gemini 2.5 Flash, Pro, or Lite
-- **Quality Settings**: Balance speed vs quality
-- **Batch Processing**: Enable/disable batch generation
-- **Auto-save**: Save generated images automatically
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### How to Contribute
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Adobe](https://www.adobe.com/) for the UXP platform
-- [Google AI](https://ai.google.dev/) for the powerful Gemini API
-- Open-source community for inspiration and tools
-- All contributors who help make this project possible
-
-## 📞 Support
-
-- **Documentation**: Check our [docs](docs/) folder for detailed guides
-- **Issues**: Report bugs or request features on [GitHub Issues](https://github.com/Aladin147/banana4all/issues)
-- **Discussions**: Join our community discussions on [GitHub Discussions](https://github.com/Aladin147/banana4all/discussions)
-- **Discord**: [Join our Discord server](https://discord.gg/banana4all)
-
-## 🌟 Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Aladin147/banana4all&type=Date)](https://star-history.com/#Aladin147/banana4all&Date)
+   - Go to **Plugins > Manage Plugins**
+   - Click **Add Plugin**
+   - Select the `dist` folder from this project
+   - The plugin will appear in your panels
 
 ---
 
-**Made with ❤️ for the creative community**
+## 📖 Usage
+
+1. **Enter your API key**
+   - Get a free key at [openrouter.ai/keys](https://openrouter.ai/keys)
+   - Paste it in the "OpenRouter API Key" field
+   - It will be saved automatically
+
+2. **Create a document**
+   - Open or create a Photoshop document
+   - Any size works (recommended: 1024x1024 or larger)
+
+3. **Generate an image**
+   - Enter a descriptive prompt (e.g., "a delicious banana on a wooden table, warm lighting, food photography")
+   - Click **Generate Image**
+   - Wait ~8 seconds
+   - A new layer will be created with your generated image
+
+4. **Tips for better results**
+   - Be specific about style, lighting, and composition
+   - Mention camera angles, materials, and atmosphere
+   - Use descriptive adjectives
+   - Reference art styles or photography techniques
+
+---
+
+## 🏗️ Architecture
+
+```
+banana4all/
+├── src/                    # Plugin source code
+│   ├── js/
+│   │   ├── main.js        # UI logic & API client
+│   │   └── photoshop-utils.js  # Photoshop layer operations
+│   ├── css/
+│   │   └── styles.css     # Dark theme styling
+│   ├── index.html         # Plugin UI
+│   └── manifest.json      # UXP plugin manifest
+│
+├── dist/                   # Built plugin (load this in Photoshop)
+│
+├── proxy-server/           # Local API proxy
+│   ├── server.js          # Express server
+│   └── package.json
+│
+├── docs/                   # Documentation
+│   └── ResearchDoc-referencemap.md  # Roadmap & research
+│
+└── webpack.config.js       # Build configuration
+```
+
+### Why a Proxy Server?
+
+The proxy server keeps Photoshop offline while handling external API calls. This provides:
+- **Privacy**: API keys never leave your machine
+- **Security**: Photoshop doesn't need internet access
+- **Control**: All API traffic goes through one local process
+- **Flexibility**: Easy to swap API providers
+
+---
+
+## 🔧 Development
+
+### Build Commands
+
+```bash
+# Production build
+npm run build
+
+# Development build with watch mode
+npm run watch
+```
+
+### Project Structure
+
+- **UXP Plugin**: Built with vanilla JavaScript, uses Spectrum Web Components
+- **Proxy Server**: Node.js/Express server for API routing
+- **Build System**: Webpack for bundling and optimization
+
+### Key Files
+
+- `src/js/main.js` - Plugin UI logic and API client
+- `src/js/photoshop-utils.js` - Photoshop DOM manipulation
+- `proxy-server/server.js` - API proxy with OpenRouter integration
+- `src/manifest.json` - UXP plugin configuration
+
+---
+
+## 🎨 Model Information
+
+**Gemini 2.5 Flash Image** (Nano Banana)
+- Fast generation (~5-10 seconds)
+- High visual quality
+- Strong identity preservation
+- Good for portraits, products, and scenes
+- Includes SynthID watermarking
+- Cost: ~$0.001 per image via OpenRouter
+
+---
+
+## 🐛 Troubleshooting
+
+### Plugin doesn't appear in Photoshop
+- Make sure you selected the `dist` folder, not the root folder
+- Restart Photoshop after loading the plugin
+- Check that manifest.json exists in the dist folder
+
+### "Proxy server not running" error
+- Make sure the proxy server is running: `cd proxy-server && npm start`
+- Check that it's running on port 3000
+- Look for the banana ASCII art in the terminal
+
+### Generation fails
+- Verify your API key is correct
+- Check the proxy server logs for errors
+- Ensure you have an active document open in Photoshop
+- Check your OpenRouter account has credits
+
+### Input fields not working
+- The plugin uses Spectrum UXP components
+- If fields are unresponsive, try reloading the plugin
+- Check browser console for errors (Developer > Console)
+
+---
+
+## 📋 Roadmap
+
+See [docs/ResearchDoc-referencemap.md](docs/ResearchDoc-referencemap.md) for detailed roadmap.
+
+**Phase 1** ✅ - Basic text-to-image generation (COMPLETE)
+
+**Phase 2** 🔜 - Pro-grade inpainting & layer hygiene
+- Selection-aware inpaint
+- Exact alignment and blending
+- Multi-variant generation
+- Auto-feathering
+
+**Phase 3** 🔜 - Reference-guided edits
+- Reference image input
+- Color hinting
+- Prompt presets
+
+**Phase 4** 🔜 - Multi-backend & high-res
+- Multiple API providers
+- High-resolution pipeline
+- Batch processing
+
+**Phase 5** 🔜 - Context fidelity
+- Auto-context windows
+- Lighting consistency
+- Edge-aware blending
+
+**Phase 6** 🔜 - Power-user features
+- Live preview grids
+- Brush-guided generation
+- History & recipes
+- Content badges
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly in Photoshop
+5. Submit a pull request
+
+---
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+---
+
+## 🙏 Acknowledgments
+
+- Google Gemini team for Nano Banana
+- OpenRouter for API access
+- Adobe for UXP framework
+- The Photoshop plugin community
+
+---
+
+## 📞 Support
+
+- Issues: [GitHub Issues](https://github.com/yourusername/banana4all/issues)
+- Discussions: [GitHub Discussions](https://github.com/yourusername/banana4all/discussions)
+
+---
+
+**Made with 🍌 for the creative community**

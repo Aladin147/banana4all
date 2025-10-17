@@ -1,86 +1,21 @@
 {
   "name": "banana4all",
-  "version": "1.0.0-beta",
-  "description": "Free Photoshop plugin for Google Gemini Flash AI integration",
-  "main": "src/index.html",
+  "version": "1.0.0",
+  "description": "A simplified UXP plugin for Photoshop.",
+  "main": "dist/index.html",
   "scripts": {
-    "start": "webpack serve --mode development",
-    "build": "webpack --mode production",
-    "build:dev": "webpack --mode development",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint src/**/*.js --fix",
-    "package": "npm run build && node scripts/package.js",
-    "clean": "rimraf dist build coverage",
-    "prepare": "npm run clean && npm install",
-    "dev": "concurrently \"npm run start\" \"npm run test:watch\""
+    "build": "webpack --mode=production",
+    "watch": "webpack --watch --mode=development"
   },
-  "keywords": [
-    "photoshop",
-    "plugin",
-    "ai",
-    "gemini",
-    "image-generation",
-    "uxp",
-    "adobe"
-  ],
-  "author": "Banana4all Team",
+  "keywords": ["photoshop", "uxp", "plugin"],
+  "author": "Your Name",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Aladin147/banana4all.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Aladin147/banana4all/issues"
-  },
-  "homepage": "https://github.com/Aladin147/banana4all#readme",
   "devDependencies": {
-    "@babel/core": "^7.22.0",
-    "@babel/preset-env": "^7.22.0",
-    "archiver": "^6.0.0",
-    "babel-jest": "^29.5.0",
-    "babel-loader": "^9.1.0",
-    "concurrently": "^8.2.0",
-    "core-js": "^3.31.0",
-    "css-loader": "^6.8.0",
-    "eslint": "^8.45.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.27.0",
-    "html-webpack-plugin": "^5.5.0",
-    "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0",
-    "jest-fetch-mock": "^3.0.3",
-    "mini-css-extract-plugin": "^2.7.0",
-    "rimraf": "^5.0.0",
-    "style-loader": "^3.3.0",
-    "webpack": "^5.88.0",
-    "webpack-cli": "^5.1.0",
-    "webpack-dev-server": "^4.15.0"
-  },
-  "dependencies": {
-    "axios": "^1.4.0",
-    "crypto-js": "^4.1.0"
-  },
-  "uxp": {
-    "host": {
-      "app": "PS",
-      "minVersion": "25.0"
-    },
-    "icons": [
-      {
-        "width": 23,
-        "height": 23,
-        "path": "assets/icon-dark.png",
-        "theme": "dark"
-      },
-      {
-        "width": 23,
-        "height": 23,
-        "path": "assets/icon-light.png",
-        "theme": "light"
-      }
-    ]
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^5.1.4"
   }
 }

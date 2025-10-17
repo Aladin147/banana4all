@@ -1,141 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Banana4all - AI Image Generator</title>
+    <title>Banana4All</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="app">
-        <header class="app-header">
-            <h1>🍌 Banana4all</h1>
-            <p class="subtitle">AI Image Generation with Google Gemini Flash</p>
-        </header>
+    <div class="plugin">
+        <!-- Header -->
+        <div class="header">
+            <span class="logo">🍌</span>
+            <span class="title">Banana4All</span>
+        </div>
 
-        <main class="app-main">
-            <!-- API Key Section -->
-            <section id="api-section" class="section">
-                <h2>API Configuration</h2>
-                <div class="api-config">
-                    <div class="input-group">
-                        <label for="api-key">Google AI API Key:</label>
-                        <input type="password" id="api-key" placeholder="Enter your API key">
-                        <button id="save-api-key" class="btn-primary">Save Key</button>
-                    </div>
-                    <div class="api-status" id="api-status">
-                        <span class="status-indicator"></span>
-                        <span class="status-text">Not configured</span>
-                    </div>
-                </div>
-            </section>
+        <!-- API Key -->
+        <div class="field">
+            <label for="apiKey">OpenRouter API Key</label>
+            <sp-textfield 
+                id="apiKey" 
+                placeholder="sk-or-v1-..."
+                quiet
+            ></sp-textfield>
+            <span class="hint">Get key at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a></span>
+        </div>
 
-            <!-- Generation Section -->
-            <section id="generation-section" class="section">
-                <h2>Image Generation</h2>
-                <div class="generation-controls">
-                    <div class="prompt-input">
-                        <label for="prompt">Enter your prompt:</label>
-                        <textarea id="prompt" rows="4" placeholder="Describe the image you want to generate..."></textarea>
-                    </div>
+        <!-- Prompt -->
+        <div class="field">
+            <label for="prompt">Image Prompt</label>
+            <sp-textarea 
+                id="prompt" 
+                placeholder="a delicious banana on a wooden table"
+                rows="4"
+                quiet
+            ></sp-textarea>
+            <span class="hint">Be specific about style and composition</span>
+        </div>
 
-                    <div class="settings-panel">
-                        <h3>Settings</h3>
-                        <div class="setting-group">
-                            <label for="image-size">Image Size:</label>
-                            <select id="image-size">
-                                <option value="512x512">512 × 512</option>
-                                <option value="1024x1024" selected>1024 × 1024</option>
-                                <option value="custom">Custom</option>
-                            </select>
-                        </div>
+        <!-- Generate Button -->
+        <button id="generate" class="btn">
+            <span>✨</span>
+            <span>Generate Image</span>
+        </button>
 
-                        <div class="setting-group">
-                            <label for="quality">Quality:</label>
-                            <select id="quality">
-                                <option value="draft">Draft (Fast)</option>
-                                <option value="standard" selected>Standard</option>
-                                <option value="high">High Quality</option>
-                            </select>
-                        </div>
-
-                        <div class="setting-group">
-                            <label for="num-images">Number of Images:</label>
-                            <input type="number" id="num-images" min="1" max="4" value="1">
-                        </div>
-                    </div>
-
-                    <button id="generate-btn" class="btn-primary btn-large">
-                        <span class="btn-text">Generate Images</span>
-                        <span class="btn-loading" style="display: none;">Generating...</span>
-                    </button>
-                </div>
-            </section>
-
-            <!-- Results Section -->
-            <section id="results-section" class="section">
-                <h2>Results</h2>
-                <div id="results-container" class="results-container">
-                    <div class="empty-state">
-                        <p>Generated images will appear here</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- History Section -->
-            <section id="history-section" class="section">
-                <h2>History</h2>
-                <div id="history-container" class="history-container">
-                    <div class="empty-state">
-                        <p>Your generation history will appear here</p>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="app-footer">
-            <div class="footer-links">
-                <a href="#" id="help-btn">Help</a>
-                <a href="#" id="settings-btn">Settings</a>
-                <a href="#" id="about-btn">About</a>
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-label">Model</span>
+                <span class="stat-value">Gemini 2.5</span>
             </div>
-            <div class="version-info">
-                <span>Banana4all v1.0.0-beta</span>
+            <div class="stat">
+                <span class="stat-label">Cost</span>
+                <span class="stat-value">~$0.001</span>
             </div>
-        </footer>
-    </div>
-
-    <!-- Modals -->
-    <div id="loading-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="loading-spinner"></div>
-            <p id="loading-text">Generating your image...</p>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+            <div class="stat">
+                <span class="stat-label">Speed</span>
+                <span class="stat-value">~8 sec</span>
             </div>
         </div>
     </div>
-
-    <div id="error-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h3>Error</h3>
-            <p id="error-message">An error occurred during generation.</p>
-            <button id="error-close-btn" class="btn-primary">Close</button>
-        </div>
-    </div>
-
-    <div id="success-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h3>Success!</h3>
-            <p id="success-message">Image generated successfully.</p>
-            <button id="success-close-btn" class="btn-primary">Close</button>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="js/api-client.js"></script>
-    <script src="js/storage.js"></script>
-    <script src="js/ui-controller.js"></script>
-    <script src="js/main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

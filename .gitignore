@@ -4,8 +4,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Build outputs
-dist/
+# Build outputs (dist/ is committed for plugin distribution)
 build/
 *.log
 *.tmp
@@ -64,3 +63,14 @@ logs/
 # Claude AI
 .claude/settings.local.json
 .claude/
+
+# API Keys and Credentials
+*.key
+api-keys.txt
+.api-keys
+google-api-key.txt
+.env.local.api-key
+
+# Sensitive Configuration
+config/api-key.js
+secrets/
