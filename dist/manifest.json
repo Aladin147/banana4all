@@ -22,8 +22,8 @@
       "preferredDockedSize": { "width": 230, "height": 300 },
       "preferredFloatingSize": { "width": 400, "height": 300 },
       "icons": [
-        { "width": 23, "height": 23, "path": "assets/icon-dark.svg", "scale": [1, 2], "theme": ["darkest", "dark", "medium"] },
-        { "width": 23, "height": 23, "path": "assets/icon-light.svg", "scale": [1, 2], "theme": ["lightest", "light"] }
+        { "width": 23, "height": 23, "path": "icons/icon-dark.svg", "scale": [1, 2], "theme": ["darkest", "dark", "medium"] },
+        { "width": 23, "height": 23, "path": "icons/icon-light.svg", "scale": [1, 2], "theme": ["lightest", "light"] }
       ]
     }
   ],
@@ -37,7 +37,7 @@
     "localFileSystem": "fullAccess"
   },
   "icons": [
-    { "width": 48, "height": 48, "path": "assets/icon-dark.svg", "scale": [1, 2], "theme": ["darkest", "dark", "medium", "all"], "species": ["pluginList"] },
-    { "width": 48, "height": 48, "path": "assets/icon-light.svg", "scale": [1, 2], "theme": ["lightest", "light", "all"], "species": ["pluginList"] }
+    { "width": 48, "height": 48, "path": "icons/icon-dark.svg", "scale": [1, 2], "theme": ["darkest", "dark", "medium", "all"], "species": ["pluginList"] },
+    { "width": 48, "height": 48, "path": "icons/icon-light.svg", "scale": [1, 2], "theme": ["lightest", "light", "all"], "species": ["pluginList"] }
   ]
 }

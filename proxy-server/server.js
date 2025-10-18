@@ -32,14 +32,37 @@ const CORS_HEADERS = {
 /**
  * Handle OpenRouter API requests
  */
-function handleOpenRouter(apiKey, model, prompt, imageData, res) {
+function handleOpenRouter(apiKey, model, prompt, imageData, res, mode = 'full', contentImage = null, maskImage = null) {
   const selectedModel = model || 'google/gemini-2.5-flash-image';
 
-  // Build the request based on whether we're generating or editing
+  // Build the request based on mode
   let requestBody;
 
-  if (imageData) {
-    // Image editing mode - use vision model with image input
+  if (mode === 'inpaint' && imageData) {
+    // Semantic inpainting mode - send cropped image with semantic prompt
+    console.log(`[${new Date().toISOString()}] Semantic inpainting mode: image length ${imageData.length}`);
+    
+    requestBody = {
+      model: selectedModel,
+      modalities: ["image", "text"],
+      n: 1,
+      messages: [
+        {
+          role: 'user',
+          content: [
+            { type: 'text', text: prompt },
+            {
+              type: 'image_url',
+              image_url: {
+                url: `data:image/png;base64,${imageData}`
+              }
+            }
+          ]
+        }
+      ]
+    };
+  } else if (imageData) {
+    // Image editing mode - use vision model with image input (legacy)
     requestBody = {
       model: selectedModel,
       messages: [
@@ -95,7 +118,9 @@ function handleOpenRouter(apiKey, model, prompt, imageData, res) {
   };
 
   console.log(`[${new Date().toISOString()}] API Key format: ${apiKey.substring(0, 10)}...`);
+  console.log(`[${new Date().toISOString()}] API Key length: ${apiKey.length}`);
   console.log(`[${new Date().toISOString()}] Forwarding to OpenRouter: ${selectedModel}`);
+  console.log(`[${new Date().toISOString()}] Request body:`, JSON.stringify(requestBody, null, 2));
 
   if (!imageData) {
     const actualPrompt = requestBody.messages[0].content;
@@ -384,7 +409,7 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       try {
         const requestData = JSON.parse(body);
-        const { apiKey, model, prompt, imageData, provider } = requestData;
+        const { apiKey, model, prompt, imageData, provider, mode, contentImage, maskImage, bounds } = requestData;
 
         if (!apiKey) {
           res.writeHead(400, { ...CORS_HEADERS, 'Content-Type': 'application/json' });
@@ -392,12 +417,38 @@ const server = http.createServer((req, res) => {
           return;
         }
 
+        // Validate inpainting requests (semantic inpainting uses imageData, not contentImage/maskImage)
+        if (mode === 'inpaint') {
+          if (!imageData) {
+            res.writeHead(400, { ...CORS_HEADERS, 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ 
+              error: 'Semantic inpainting requires imageData (cropped region)' 
+            }));
+            return;
+          }
+
+          // Validate base64 format
+          const base64Regex = /^[A-Za-z0-9+/=]+$/;
+          if (!base64Regex.test(imageData)) {
+            res.writeHead(400, { ...CORS_HEADERS, 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ 
+              error: 'Invalid imageData format - must be base64' 
+            }));
+            return;
+          }
+
+          console.log(`[${new Date().toISOString()}] Semantic inpainting request validated`);
+          if (bounds) {
+            console.log(`[${new Date().toISOString()}] Selection bounds: ${bounds.width}x${bounds.height} at (${bounds.left}, ${bounds.top})`);
+          }
+        }
+
         console.log(`[${new Date().toISOString()}] Request from plugin: ${prompt ? prompt.substring(0, 50) : 'image edit'}...`);
-        console.log(`[${new Date().toISOString()}] Provider: ${provider || 'openrouter'}, Model: ${model}`);
+        console.log(`[${new Date().toISOString()}] Mode: ${mode || 'full'}, Provider: ${provider || 'openrouter'}, Model: ${model}`);
 
         // Route to appropriate provider
         if (provider === 'openrouter' || !provider) {
-          handleOpenRouter(apiKey, model, prompt, imageData, res);
+          handleOpenRouter(apiKey, model, prompt, imageData, res, mode, contentImage, maskImage);
         } else if (provider === 'google') {
           handleGoogleAI(apiKey, model, prompt, imageData, res);
         } else {

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Banana4All</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <div class="plugin">
         <!-- Header -->
@@ -16,23 +18,35 @@
         <!-- API Key -->
         <div class="field">
             <label for="apiKey">OpenRouter API Key</label>
-            <sp-textfield 
-                id="apiKey" 
-                placeholder="sk-or-v1-..."
-                quiet
-            ></sp-textfield>
-            <span class="hint">Get key at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a></span>
+            <sp-textfield id="apiKey" placeholder="sk-or-v1-..." quiet></sp-textfield>
+            <span class="hint">Get key at <a href="https://openrouter.ai/keys"
+                    target="_blank">openrouter.ai/keys</a></span>
+            <span class="hint" style="color: #ff9500; font-size: 11px;">⚠️ Stored locally without encryption</span>
+        </div>
+
+        <!-- Mode Selector -->
+        <div class="field">
+            <label>Generation Mode</label>
+            <span class="hint" id="mode-hint" style="font-size: 12px; color: #999;">No selection - will generate new layer</span>
+            <span class="hint" style="font-size: 11px;">💡 Create a selection to automatically use inpainting mode</span>
+        </div>
+
+        <!-- Variant Count -->
+        <div class="field">
+            <label for="variantCount">Variants</label>
+            <select id="variantCount" class="select">
+                <option value="1" selected>1 (fastest)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4 (slowest)</option>
+            </select>
+            <span class="hint">Generate multiple variations to choose from</span>
         </div>
 
         <!-- Prompt -->
         <div class="field">
             <label for="prompt">Image Prompt</label>
-            <sp-textarea 
-                id="prompt" 
-                placeholder="a delicious banana on a wooden table"
-                rows="4"
-                quiet
-            ></sp-textarea>
+            <sp-textarea id="prompt" placeholder="a delicious banana on a wooden table" rows="4" quiet></sp-textarea>
             <span class="hint">Be specific about style and composition</span>
         </div>
 
@@ -60,4 +74,5 @@
     </div>
     <script src="main.js"></script>
 </body>
+
 </html>

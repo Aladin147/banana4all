@@ -8,7 +8,7 @@ Fast, affordable, high-quality image generation directly in Photoshop. Generate 
 
 ## ✨ Features
 
-**Phase 1 (Current - Stable)**
+**Phase 1 - Text-to-Image** ✅
 - ✅ Text-to-image generation
 - ✅ Direct layer creation in Photoshop
 - ✅ Fast generation (~8 seconds)
@@ -16,12 +16,20 @@ Fast, affordable, high-quality image generation directly in Photoshop. Generate 
 - ✅ Clean, dark-themed UI
 - ✅ API key persistence
 
+**Phase 2 - Semantic Inpainting** ✅ NEW!
+- ✅ Selection-aware inpainting
+- ✅ Automatic mode detection
+- ✅ Smart cropping with padding
+- ✅ Automatic image resizing
+- ✅ Precise layer positioning
+- ✅ Auto-feathering for seamless blending
+
 **Coming Soon**
-- 🔜 Phase 2: Selection-aware inpainting & layer management
-- 🔜 Phase 3: Reference-guided edits & prompt presets
-- 🔜 Phase 4: Multi-backend support & high-res pipeline
-- 🔜 Phase 5: Context fidelity & realism controls
-- 🔜 Phase 6: Live previews & advanced workflows
+- 🔜 Phase 3: Multi-variant generation & layer groups
+- 🔜 Phase 4: Reference-guided edits & prompt presets
+- 🔜 Phase 5: Multi-backend support & high-res pipeline
+- 🔜 Phase 6: Context fidelity & realism controls
+- 🔜 Phase 7: Live previews & advanced workflows
 
 ---
 
@@ -71,6 +79,8 @@ Fast, affordable, high-quality image generation directly in Photoshop. Generate 
 
 ## 📖 Usage
 
+### Text-to-Image Generation
+
 1. **Enter your API key**
    - Get a free key at [openrouter.ai/keys](https://openrouter.ai/keys)
    - Paste it in the "OpenRouter API Key" field
@@ -86,11 +96,37 @@ Fast, affordable, high-quality image generation directly in Photoshop. Generate 
    - Wait ~8 seconds
    - A new layer will be created with your generated image
 
-4. **Tips for better results**
-   - Be specific about style, lighting, and composition
-   - Mention camera angles, materials, and atmosphere
-   - Use descriptive adjectives
-   - Reference art styles or photography techniques
+### Semantic Inpainting (NEW!)
+
+1. **Create a selection**
+   - Use any selection tool (Marquee, Lasso, Magic Wand, etc.)
+   - Select the area you want to edit
+   - The plugin will automatically detect your selection
+
+2. **Enter your edit prompt**
+   - Describe what you want to change (e.g., "add a dragon to the scene")
+   - Be specific about what to change and what to keep
+   - Click **Generate Image**
+
+3. **Watch the magic happen**
+   - Plugin crops the selection with padding
+   - Sends to Gemini with semantic instructions
+   - Automatically resizes and positions the result
+   - Applies feathered masking for seamless blending
+
+### Tips for Better Results
+
+**Text-to-Image:**
+- Be specific about style, lighting, and composition
+- Mention camera angles, materials, and atmosphere
+- Use descriptive adjectives
+- Reference art styles or photography techniques
+
+**Inpainting:**
+- Keep selections between 200-1500 pixels for best results
+- Be specific: "change the carpet to blue" not "make it better"
+- Describe what to change AND what to preserve
+- Use natural language: "add a red sports car in the driveway"
 
 ---
 
@@ -199,13 +235,19 @@ See [docs/ResearchDoc-referencemap.md](docs/ResearchDoc-referencemap.md) for det
 
 **Phase 1** ✅ - Basic text-to-image generation (COMPLETE)
 
-**Phase 2** 🔜 - Pro-grade inpainting & layer hygiene
-- Selection-aware inpaint
-- Exact alignment and blending
-- Multi-variant generation
-- Auto-feathering
+**Phase 2** ✅ - Semantic inpainting (COMPLETE - v1.1.0)
+- Selection-aware inpainting
+- Automatic mode detection
+- Smart cropping with padding
+- Automatic resizing and positioning
+- Auto-feathering for seamless blending
 
-**Phase 3** 🔜 - Reference-guided edits
+**Phase 3** 🔜 - Multi-variant generation
+- Generate 2-4 variants at once
+- Layer groups for organization
+- Variant comparison
+
+**Phase 4** 🔜 - Reference-guided edits
 - Reference image input
 - Color hinting
 - Prompt presets

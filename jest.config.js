@@ -12,7 +12,7 @@ module.exports = {
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
   transform: {
@@ -25,5 +25,6 @@ module.exports = {
   ],
   transformIgnorePatterns: [
     'node_modules/(?!(axios)/)'
-  ]
+  ],
+  testTimeout: 10000
 };

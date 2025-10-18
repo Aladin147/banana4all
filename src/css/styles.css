@@ -192,3 +192,146 @@ textarea::-webkit-input-placeholder {
     font-weight: 600;
     color: #f59e0b;
 }
+
+/* 
+Mode Selector */
+.mode-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mode-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.mode-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 8px;
+    min-height: 60px;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    font-size: 13px;
+    color: #e5e5e5;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.mode-btn:hover:not(:disabled) {
+    border-color: #f59e0b;
+    background: #2d2d2d;
+}
+
+.mode-btn.active {
+    border-color: #f59e0b;
+    background: #3a2a1a;
+}
+
+.mode-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.mode-icon {
+    font-size: 20px;
+}
+
+.mode-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Select Dropdown */
+.select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    color: #ffffff;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.select:hover {
+    border-color: #555;
+    background: #2d2d2d;
+}
+
+.select:focus {
+    border-color: #f59e0b;
+    background: #2d2d2d;
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.15);
+}
+
+.select option {
+    background: #2a2a2a;
+    color: #ffffff;
+}
+
+/* Progress UI */
+.progress {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: #2a2a2a;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.progress.active {
+    display: flex;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #444;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fbbf24, #f59e0b);
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+}
+
+.btn-cancel {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    background: #444;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: #555;
+}

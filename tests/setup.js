@@ -1,54 +1,61 @@
-// Jest setup file
-global.fetch = require('jest-fetch-mock');
+/**
+ * Jest test setup
+ * Mocks for UXP and Photoshop APIs
+ */
 
-// Mock UXP APIs for testing
-global.require = {
-  uxp: {
-    storage: {
-      getItem: jest.fn(),
-      setItem: jest.fn(),
-      removeItem: jest.fn(),
-      clear: jest.fn()
-    }
+// Mock UXP storage
+global.uxp = {
+  storage: {
+    localFileSystem: {
+      getDataFolder: jest.fn(),
+      getTemporaryFolder: jest.fn(),
+      createSessionToken: jest.fn(),
+      getEntryWithUrl: jest.fn(),
+    },
+  },
+};
+
+// Mock Photoshop API
+global.photoshop = {
+  app: {
+    activeDocument: null,
+    showAlert: jest.fn(),
+  },
+  core: {
+    executeAsModal: jest.fn((fn) => fn()),
+  },
+  action: {
+    batchPlay: jest.fn(),
+  },
+};
+
+// Mock localStorage
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+};
+global.localStorage = localStorageMock;
+
+// Mock fetch
+global.fetch = jest.fn();
+
+// Mock Blob
+global.Blob = class Blob {
+  constructor(parts, options) {
+    this.parts = parts;
+    this.type = options?.type || '';
+    this.size = parts.reduce((acc, part) => acc + (part.length || part.byteLength || 0), 0);
+  }
+  
+  arrayBuffer() {
+    return Promise.resolve(new ArrayBuffer(this.size));
   }
 };
 
-// Mock console methods for cleaner test output
-global.console = {
-  ...console,
-  log: jest.fn(),
-  debug: jest.fn(),
-  info: jest.fn(),
-  warn: jest.fn(),
-  error: jest.fn()
-};
+// Mock atob/btoa
+global.atob = (str) => Buffer.from(str, 'base64').toString('binary');
+global.btoa = (str) => Buffer.from(str, 'binary').toString('base64');
 
-// Set up global test utilities
-global.testUtils = {
-  createMockDOM: () => {
-    const container = document.createElement('div');
-    container.id = 'test-container';
-    document.body.appendChild(container);
-    return container;
-  },
-
-  cleanupMockDOM: () => {
-    const container = document.getElementById('test-container');
-    if (container) {
-      container.remove();
-    }
-  },
-
-  createMockEvent: (type, properties = {}) => {
-    const event = new Event(type, { bubbles: true, cancelable: true });
-    Object.assign(event, properties);
-    return event;
-  }
-};
-
-// Cleanup after each test
-afterEach(() => {
-  global.testUtils.cleanupMockDOM();
-  fetch.resetMocks();
-  jest.clearAllMocks();
-});
+console.log('Test environment setup complete');
